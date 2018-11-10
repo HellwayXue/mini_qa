@@ -42,25 +42,25 @@ UNQUOTED_QUERY_SCORE = 2
 
 #### Create or retrieve an S3 bucket for the cache of Google search
 #### results
-s3conn = S3Connection(config.AWS_ACCESS_KEY_ID, config.AWS_SECRET_ACCESS_KEY)
-google_cache_bucket_name = (config.AWS_ACCESS_KEY_ID).lower()+"-google-cache"
-try:
-    GOOGLE_CACHE = Key(s3conn.create_bucket(google_cache_bucket_name))
-except boto.exception.S3CreateError:
-    print ("When creating an S3 bucket for Google cache results, a conflict\n"
-           "occurred, and a bucket with the desired name already exists.")
-    sys.exit()
+# s3conn = S3Connection(config.AWS_ACCESS_KEY_ID, config.AWS_SECRET_ACCESS_KEY)
+# google_cache_bucket_name = (config.AWS_ACCESS_KEY_ID).lower()+"-google-cache"
+# try:
+#     GOOGLE_CACHE = Key(s3conn.create_bucket(google_cache_bucket_name))
+# except boto.exception.S3CreateError:
+#     print ("When creating an S3 bucket for Google cache results, a conflict\n"
+#            "occurred, and a bucket with the desired name already exists.")
+#     sys.exit()
 
-#### Create or retrieve an S3 bucket for the cache of Wolfram Alpha
-#### results
-wolfram_cache_bucket_name = (config.AWS_ACCESS_KEY_ID).lower()+"-wolfram-cache"
-try:
-    WOLFRAM_CACHE = Key(s3conn.create_bucket(wolfram_cache_bucket_name))
-except boto.exception.S3CreateError:
-    print ("When creating an S3 bucket for Wolfram Alpha cache results, a\n"
-           "conflict occurred, and a bucket with the desired name already\n"
-           "exists.")
-    sys.exit()
+# #### Create or retrieve an S3 bucket for the cache of Wolfram Alpha
+# #### results
+# wolfram_cache_bucket_name = (config.AWS_ACCESS_KEY_ID).lower()+"-wolfram-cache"
+# try:
+#     WOLFRAM_CACHE = Key(s3conn.create_bucket(wolfram_cache_bucket_name))
+# except boto.exception.S3CreateError:
+#     print ("When creating an S3 bucket for Wolfram Alpha cache results, a\n"
+#            "conflict occurred, and a bucket with the desired name already\n"
+#            "exists.")
+#     sys.exit()
 
 
 def pretty_qa(question, source="google", num=10):
@@ -171,8 +171,8 @@ def get_summaries(query, source="google"):
     Note also that we use GOOGLE_CACHE to cache old results, and will
     preferentially retrieve from the cache, whenever possible.
     """
-    GOOGLE_CACHE.key = query
-    if GOOGLE_CACHE.exists():
+    # GOOGLE_CACHE.key = query
+    if False:
         return pickle.loads(GOOGLE_CACHE.get_contents_as_string())
     else:
         results = search(query)

@@ -43,7 +43,7 @@
 
 __all__ = ['search']
 
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import cookielib
 import os
 import random
